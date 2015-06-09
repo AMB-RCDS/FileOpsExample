@@ -1,31 +1,37 @@
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ObjectFileLoader
 {
+	private final String filename = "savedFile.ser";
+	
 	public ObjectFileLoader()
 	{
-		
+		//placeholder for the data to load in
+		DataFile readFile = null;
 		
 		//get input from the FILE
 		try
 		{
-			textLoader = new Scanner(new File(fName));
+			FileInputStream fileStream = new FileInputStream(filename);
+			ObjectInputStream inStream = new ObjectInputStream(fileStream);
 
-			ArrayList<String> rawData = new ArrayList<>();
+			//read the entire object at once!
+			readFile = (DataFile)inStream.readObject();
 			
-			//as long as there are lines left to read...
-			while (textLoader.hasNext())
-				//read a line, store it in rawData
-				rawData.add(textLoader.nextLine());
+			//don't forget to close the streams!  This protects the file!
+			fileStream.close();
+			inStream.close();
 
-			//don't forget to close the Scanner!  This protects the file!
-			textLoader.close();
-
+			ArrayList<String> fileData = readFile.getTheData();
+			String fileOwner = readFile.getOwner();
+			
 			//print out all the information loaded
-			for (int i = 0; i < rawData.size(); i++)
-				System.out.println("Line " + i + ": " + rawData.get(i));
+			System.out.println("This file owned by: "+fileOwner);
+			System.out.println("Contents:");
+			for (int i = 0; i < fileData.size(); i++)
+				System.out.println("Line " + i + ": " + fileData.get(i));
 		} 
 		catch (Exception e)
 		{

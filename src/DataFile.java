@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class DataFile implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	ArrayList<String> theData;
-	String owner = "";
+	private ArrayList<String> theData;
+	private String owner = "";
 	
 	public DataFile(String o)
 	{
@@ -18,4 +18,14 @@ public class DataFile implements Serializable
 	{
 		theData.add(s);
 	}
+
+	public ArrayList<String> getTheData()
+	{
+		return theData;
+	}
+
+	public String getOwner()
+	{
+		return owner;
+	} 
 }
