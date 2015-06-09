@@ -10,6 +10,7 @@ public class TextFileLoader
 		
 		//get input from the CONSOLE
 		keyboard = new Scanner(System.in);
+		System.out.println("Text File Loading Example\nThe file example.csv is included in this repository as an test file.");
 		System.out.print("Please enter the name of a file to load: ");
 		String fName = keyboard.nextLine();
 		keyboard.close();
